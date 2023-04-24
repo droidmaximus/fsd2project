@@ -104,5 +104,6 @@ exports.deleteCourse = (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
+            res.send(500,err);
         });
 }
