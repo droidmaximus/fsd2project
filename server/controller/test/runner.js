@@ -3,19 +3,19 @@ process.env.NODE_ENV = 'test';
 
 
 // var base = './server';
-var should  = require('should');
-var testUtil = require('../../test/utils');
+// var should  = require('should');
+// var testUtil = require('../../test/utils');
 var courses = require('../courseController');
-var feedbacks = require('../feedbackController');
-var quizzes = require('../quizController');
-var requestedcourses = require('../requestedCoursesController');
-var users = require('../userController');
+// var feedbacks = require('../feedbackController');
+// var quizzes = require('../quizController');
+// var requestedcourses = require('../requestedCoursesController');
+// var users = require('../userController');
 var mongoose = require('mongoose')
 var course = require('../../model/Courses');
-var feedback = require('../../model/Feedback');
-var quiz = require('../../model/Quiz');
-var requestedcourse = require('../../model/RequestedCourses');
-var user = require('../../model/User');
+// var feedback = require('../../model/Feedback');
+// var quiz = require('../../model/Quiz');
+// var requestedcourse = require('../../model/RequestedCourses');
+// var user = require('../../model/User');
 
 
 
@@ -23,22 +23,17 @@ describe("Course API", function () {
     var dummyCourse;
     before(function(done) {
         mongoose
-  .connect(
-    "mongodb+srv://yashhh:puX0Tz2jM65KjvnZ@cluster0.0ktinyn.mongodb.net/?retryWrites=true&w=majority"
-  )
-  .then((result) => {
-    // app.listen(3001);
-    console.log("connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-        // mongoose.connect("mongodb+srv://karthik:12345677@cluster0.qttfhba.mongodb.net/newdata?retryWrites=true&w=majority",function () {
-        //     console.log('Connected');
-        //     done();
-    // });
+            .connect(
+                "mongodb+srv://yashhh:puX0Tz2jM65KjvnZ@cluster0.0ktinyn.mongodb.net/?retryWrites=true&w=majority"
+            )
+            .then((result) => {
+                console.log("connected");
+            })
+            .catch((err) => {
+                console.log(err);
+        });
 
-        dummyCourse = new Courses({
+        dummyCourse = new course({
             'title':'chess',
             'text':'Learn chess',
             'description':'Learn the coins',
@@ -85,7 +80,8 @@ describe("Course API", function () {
                 course.should.have.property('contentList');
                 course.title.should.equal('none');
                 
-            },done());
+                done();
+            });
             courses.saveCourse(req,res);
         });
     });
@@ -95,7 +91,8 @@ describe("Course API", function () {
             var req = {};
             var res = testUtil.responseValidator(200,function(courses) {
                 courses.length.should.equal(2);
-            },done());
+                done();
+            });
             courses.getCourse(req,res);
         });
     });
@@ -115,7 +112,8 @@ describe("Course API", function () {
                 course.title.should.equal('3.0');
                 course.title.should.equal('none');
                 course.title.should.equal('none');
-            },done());
+                done();
+            });
             courses.getSpecificCourse(req,res);
         });
         it("should throw error for invalid post id",function(err){
@@ -125,7 +123,8 @@ describe("Course API", function () {
                 } 
             };
             var res = testUtil.responseValidator(500,function(course) {
-            },done());
+            done();
+        });
             courses.getSpecificCourse(req,res);
         });
     });
@@ -144,7 +143,7 @@ describe("Course API", function () {
     });
 
     after(function(done){
-        post.remove({},function(err) {
+        course.deleteCourse({},function(err) {
             if(err) {console.log(err);}
         });
         mongoose.disconnect(done);
