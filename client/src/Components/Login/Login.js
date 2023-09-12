@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 // import classes from "./Signup.module.css";
 import AuthContext from "../../store/auth-context";
 import classes from "./Login.module.css";
+import { Link } from "react-router-dom";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
@@ -155,7 +156,7 @@ const Login = () => {
       <div>
         <p style={{ color: "beige" }}>
           Dont have an account: &nbsp;
-          <a href="/Signup" className={classes.a}>Signup</a>
+          <Link to="/Signup" className={classes.a}>Signup</Link>
         </p>
       </div>
     </Card>

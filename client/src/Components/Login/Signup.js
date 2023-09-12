@@ -6,6 +6,7 @@ import ErrorModal from "../UI/ErrorModal";
 import classes from "./Signup.module.css";
 import {useNavigate} from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import { Link } from "react-router-dom";
 
 
 const Signup = () => {
@@ -158,7 +159,7 @@ const Signup = () => {
         <div>
           <p style={{ color: "beige" }}>
             Already have an account: &nbsp;
-            <a href="/" className={classes.a}>Login</a>
+            <Link to="/" className={classes.a}>Login</Link>
           </p>
         </div>
       </Card>
